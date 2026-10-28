@@ -39,7 +39,7 @@ jobs:
         mkdir -p out
 
         # Конфигурация
-        make O=out ARCH=arm64 pipa_defconfig
+        make O=out ARCH=arm64 defconfig
 
         # Сама сборка (используем LLVM=1 и LLVM_IAS=1 для встроенного ассемблера)
         make O=out ARCH=arm64 -j$(nproc) LLVM=1 LLVM_IAS=1
