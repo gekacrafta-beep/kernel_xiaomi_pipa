@@ -19,11 +19,11 @@ jobs:
 
     - name: Download and Setup AOSP Clang
       run: |
-        # Скачиваем официальный Clang из AOSP (версия r487747c)
-        wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r487747c.tar.gz -O clang.tar.gz
-        mkdir -p $GITHUB_WORKSPACE/clang
-        tar -xzf clang.tar.gz -C $GITHUB_WORKSPACE/clang
-        rm clang.tar.gz
+        # Клонируем репозиторий с Clang (берем ветку master, которая всегда актуальна)
+        git clone --depth=1 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 $GITHUB_WORKSPACE/clang
+        # Удаляем лишнее, чтобы не забивать место (оставляем только нужный бинарник)
+        cd $GITHUB_WORKSPACE/clang
+        rm -rf clang-r*
 
     - name: Build Kernel
       run: |
